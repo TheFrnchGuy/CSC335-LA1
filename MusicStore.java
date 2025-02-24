@@ -3,8 +3,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+
 
 public class MusicStore {
     /* INSTANCE VARIABLES */
@@ -47,10 +47,10 @@ public class MusicStore {
             String genre = headerParts[2];
             int year = Integer.parseInt(headerParts[3]);
 
-            List<String> songs = new ArrayList<>();
-            String song;
-            while ((song = reader.readLine()) != null) {
-                songs.add(song);
+            ArrayList<Song> songs = new ArrayList<>();
+            String song_title;
+            while ((song_title = reader.readLine()) != null) {
+                songs.add(new Song(song_title, artist));
             }
 
             return new Album(title, artist, genre, year, songs);
@@ -65,7 +65,7 @@ public class MusicStore {
     public static void main(String[] args) {
         MusicStore store = new MusicStore();
         try {
-            store.loadAlbums("albums.txt");
+            store.loadAlbums("./albums/albums.txt");
         } catch (IOException e) {
             e.printStackTrace();
         }
