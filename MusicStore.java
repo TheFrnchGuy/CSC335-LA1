@@ -23,13 +23,15 @@ public class MusicStore {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(",");
-                if (parts.length == 2) {
-                    String albumTitle = parts[0];
-                    String artist = parts[1];
-                    String albumFilePath = albumTitle + "_" + artist + ".txt";
-                    Album album = loadAlbum(albumFilePath);
-                    albums.put(albumTitle, album);
+                if (parts.length != 2) {
+                	throw new IOException("Invalid album format");
                 }
+                String albumTitle = parts[0];
+                String artist = parts[1];
+                String albumFilePath = "./albums/" + albumTitle + "_" + artist + ".txt";
+                Album album = loadAlbum(albumFilePath);
+                albums.put(albumTitle, album);
+            	
             }
         }
     }
