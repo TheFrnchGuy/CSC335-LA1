@@ -2,3 +2,9 @@
 /MusicStore.class
 /Rating.class
 /Song.class
+/LibraryModel$Album.class
+/LibraryModel$Playlist.class
+/LibraryModel$Song.class
+/LibraryModel.class
+/Playlist.class
+/MusicStoreTest.class
