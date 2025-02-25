@@ -46,13 +46,16 @@ public class View {
            			getItemsFromLibrary();
            			break;
            		case 5:
+           			// create playlist
            			break;
            		case 6:
            			addRemovePlaylistSongs();
            			break;
            		case 7:
+           			// favorite a song
            			break;
            		case 8:
+           			// rate a song
            			break;
            		case 9:
            			System.exit(0);
@@ -173,14 +176,19 @@ public class View {
             String artist;
             switch (selectedOption) {
            		case 1:
+           			// song by title
            			break;
            		case 2:
+           			// song by artist
            			break;
            		case 3:
+           			// album by title
            			break;
            		case 4:
+           			// album by artist
            			break;
            		case 5:
+           			// playlist by title
            			break;
            		case 6:
            			selectionList();
@@ -211,8 +219,10 @@ public class View {
             int selectedOption = Integer.parseInt(givenInput);
             switch (selectedOption) {
            		case 1:
+           			// add song to library
            			break;
            		case 2:
+           			// add album to library
            			break;
            		case 3:
            			selectionList();
@@ -246,14 +256,19 @@ public class View {
             int selectedOption = Integer.parseInt(givenInput);
             switch (selectedOption) {
            		case 1:
+           			// get list of song titles
            			break;
            		case 2:
+           			// get list of artists
            			break;
            		case 3:
+           			// get list of albums
            			break;
            		case 4:
+           			// get list of playlists
            			break;
            		case 5:
+           			// get list of fav'd songs
            			break;
            		case 6:
            			selectionList();
@@ -284,8 +299,10 @@ public class View {
             int selectedOption = Integer.parseInt(givenInput);
             switch (selectedOption) {
            		case 1:
+           			// add song to playlist
            			break;
            		case 2:
+           			// remove song from playlist
            			break;
            		case 3:
            			selectionList();
