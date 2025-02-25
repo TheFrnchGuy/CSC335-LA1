@@ -58,6 +58,7 @@ public class View {
            			// rate a song
            			break;
            		case 9:
+           			System.out.println("Program Terminated.");
            			System.exit(0);
            		default:
            			System.out.println("Invalid Input");
@@ -142,6 +143,7 @@ public class View {
            			}
            			break;
            		case 5:
+           			System.out.println("");
            			selectionList();
            			break;
            		default:
@@ -191,6 +193,7 @@ public class View {
            			// playlist by title
            			break;
            		case 6:
+           			System.out.println("");
            			selectionList();
            			break;
            		default:
@@ -225,6 +228,7 @@ public class View {
            			// add album to library
            			break;
            		case 3:
+           			System.out.println("");
            			selectionList();
            			break;
            		default:
@@ -271,6 +275,7 @@ public class View {
            			// get list of fav'd songs
            			break;
            		case 6:
+           			System.out.println("");
            			selectionList();
            			break;
            		default:
@@ -305,6 +310,7 @@ public class View {
            			// remove song from playlist
            			break;
            		case 3:
+           			System.out.println("");
            			selectionList();
            			break;
            		default:
