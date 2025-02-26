@@ -302,24 +302,173 @@ public class View {
     	String givenInput = scanner.nextLine();
     	try {
             int selectedOption = Integer.parseInt(givenInput);
-            ArrayList<String> results;
+            ArrayList<Album> resultA;
+            ArrayList<Song> resultS;
+            ArrayList<Playlist> resultP;
             String title;
             String artist;
             switch (selectedOption) {
            		case 1:
-           			// song by title
+           			// Search for a song by title
+           			System.out.println("");
+           			System.out.println("Input title:");
+           			title = scanner.nextLine();
+           			resultS = new ArrayList<Song>();
+           			resultA = new ArrayList<Album>();
+           			for (Album album : model.getAlbums()) {
+           				for (Song song : album.getSongs()) {
+           					if(song.getTitle().equals(title)) {
+           						resultS.add(song);
+           						resultA.add(album);
+           					}
+           				}
+           			}
+           			// checks to see if the song exists without an album tied to it
+           			if (resultS.size() == 0) {
+           				for (Song song : model.getSongs()) {
+           					if(song.getTitle().equals(title)) {
+           						resultS.add(song);
+           						resultA.add(new Album("NOT_IN_ALBUM", "NULL", "NULL", 0, new ArrayList<Song>()));
+           					}
+           				}
+       				}
+           			// now if the size is 0, it's confirmed the song doesn't exist
+           			if (resultS.size() == 0) {
+       					System.out.println("Song not found");
+           				System.out.println("");
+           				userLibrarySearch();
+       				}
+       				else {
+       					int pos = 0;
+       					for (Song song : resultS) {
+       						System.out.println(("Title: " + song.getTitle() + ", Arist: " + song.getArtist() + ", Album: " +
+   									resultA.get(pos).getTitle()));
+       						pos++;
+       					}
+       					System.out.println("");
+           				selectionList();
+       				}
            			break;
            		case 2:
-           			// song by artist
+           			// Search for a song by artist
+           			System.out.println("");
+           			System.out.println("Input artist:");
+           			artist = scanner.nextLine();
+           			resultS = new ArrayList<Song>();
+           			resultA = new ArrayList<Album>();
+           			for (Album album : model.getAlbums()) {
+           				for (Song song : album.getSongs()) {
+           					if(song.getArtist().equals(artist)) {
+           						resultS.add(song);
+           						resultA.add(album);
+           					}
+           				}
+           			}
+           			// checks to see if the song exists without an album tied to it
+           			if (resultS.size() == 0) {
+           				for (Song song : model.getSongs()) {
+           					if(song.getArtist().equals(artist)) {
+           						resultS.add(song);
+           						resultA.add(new Album("NOT_IN_ALBUM", "NULL", "NULL", 0, new ArrayList<Song>()));
+           					}
+           				}
+       				}
+           			// now if the size is 0, it's confirmed the song doesn't exist
+           			if (resultS.size() == 0) {
+       					System.out.println("Song not found");
+           				System.out.println("");
+           				userLibrarySearch();
+       				}
+       				else {
+       					int pos = 0;
+       					for (Song song : resultS) {
+       						System.out.println(("Title: " + song.getTitle() + ", Arist: " + song.getArtist() + ", Album: " +
+   									resultA.get(pos).getTitle()));
+       						pos++;
+       					}
+       					System.out.println("");
+           				selectionList();
+       				}
            			break;
            		case 3:
-           			// album by title
+           			// Search for an album by title
+           			System.out.println("");
+           			System.out.println("Input title:");
+           			title = scanner.nextLine();
+           			resultA = model.albumByTitle(title);
+           			if (resultA.size() == 0) {
+           				System.out.println("Album not found");
+           				System.out.println("");
+           				userLibrarySearch();
+           			}
+           			else {
+           				for (Album album : resultA) {
+           					System.out.println("Title: " + album.getTitle() + ", Arist: " + album.getArtist() + ", Genre: " +
+   									album.getGenre() + ", Year: " + album.getYear());
+           					System.out.println("");
+               				System.out.println("Song List:");
+               				for (Song song : album.getSongs()) {
+               					System.out.println(song.getTitle());
+               				}
+               				System.out.println("");
+           				}
+           				System.out.println("");
+           				selectionList();
+           			}
            			break;
            		case 4:
-           			// album by artist
+           			// Search for an album by artist
+           			System.out.println("");
+           			System.out.println("Input artist:");
+           			artist = scanner.nextLine();
+           			resultA = model.albumByArtist(artist);
+           			if (resultA.size() == 0) {
+           				System.out.println("Album not found");
+           				System.out.println("");
+           				userLibrarySearch();
+           			}
+           			else {
+           				for (Album album : resultA) {
+           					System.out.println("Title: " + album.getTitle() + ", Arist: " + album.getArtist() + ", Genre: " +
+   									album.getGenre() + ", Year: " + album.getYear());
+           					System.out.println("");
+               				System.out.println("Song List:");
+               				for (Song song : album.getSongs()) {
+               					System.out.println(song.getTitle());
+               				}
+               				System.out.println("");
+           				}
+           				System.out.println("");
+           				selectionList();
+           			}
            			break;
            		case 5:
-           			// playlist by title
+           			// Search for an album by artist
+           			System.out.println("");
+           			System.out.println("Input title:");
+           			title = scanner.nextLine();
+           			boolean exists = false;
+           			for (Playlist playlist : model.getPlaylists()) {
+           				if (playlist.getName().equals(title)) {
+           					System.out.println("Playlist: " + title);
+           					System.out.println("");
+           					System.out.println("Song List:");
+           					exists = true;
+           					for (Song song : playlist.getSongs()) {
+           						System.out.println("Title: " + song.getTitle() + ", Artist: " + song.getArtist());
+           					}
+           				}
+           			}
+           			if (exists) {
+           				System.out.println("");
+               			selectionList();
+           			}
+           			else {
+           				System.out.println("");
+           				System.out.println("Playlist not found");
+           				System.out.println("");
+           				userLibrarySearch();
+           			}
            			break;
            		case 6:
            			System.out.println("");

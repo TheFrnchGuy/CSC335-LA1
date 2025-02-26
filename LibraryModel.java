@@ -34,20 +34,24 @@ public class LibraryModel {
 		}
 	}
 	
-	public ArrayList<String> songByTitle(String title) {
-		return null;
+	public ArrayList<Album> albumByTitle(String title) {
+		ArrayList<Album> albumsCopy = new ArrayList<Album>();
+    	for (Album album : albums) {
+    		if (album.getTitle().equals(title)) {
+    			albumsCopy.add(album);
+    		}
+    	}
+        return albumsCopy;
 	}
 	
-	public ArrayList<String> songByArtist(String artist) {
-		return null;
-	}
-	
-	public ArrayList<String> albumByTitle(String title) {
-		return null;
-	}
-	
-	public ArrayList<String> albumByArtist(String artist) {
-		return null;
+	public ArrayList<Album> albumByArtist(String artist) {
+		ArrayList<Album> albumsCopy = new ArrayList<Album>();
+    	for (Album album : albums) {
+				if (album.getArtist().equals(artist)) {
+					albumsCopy.add(album);
+				}
+			}
+        return albumsCopy;
 	}
 	
 	public void createPlaylist(String title) {
