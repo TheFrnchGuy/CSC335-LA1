@@ -60,8 +60,33 @@ public class MusicStore {
     }
 
     //return an album with the given title
-    public Album getAlbum(String title) {
-        return albums.get(title);
+    public ArrayList<Album> getAlbumByTitle(String title) {
+    	ArrayList<Album> albumsCopy = new ArrayList<Album>();
+    	for (Album album : albums.values()) {
+    		if (album.getTitle().equals(title)) {
+    			albumsCopy.add(album);
+    		}
+    	}
+        return albumsCopy;
+    }
+    
+  //return an album with the given title
+    public ArrayList<Album> getAlbumByArtist(String artist) {
+    	ArrayList<Album> albumsCopy = new ArrayList<Album>();
+    	for (Album album : albums.values()) {
+				if (album.getArtist().equals(artist)) {
+					albumsCopy.add(album);
+				}
+			}
+        return albumsCopy;
+    }
+    
+    public ArrayList<Album> getAlbums(){
+    	ArrayList<Album> albumsCopy = new ArrayList<Album>();
+    	for (Album album : albums.values()) {
+    		albumsCopy.add(album);
+    	}
+    	return albumsCopy;
     }
 
     public static void main(String[] args) {
