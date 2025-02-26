@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
 
@@ -304,7 +303,6 @@ public class View {
             int selectedOption = Integer.parseInt(givenInput);
             ArrayList<Album> resultA;
             ArrayList<Song> resultS;
-            ArrayList<Playlist> resultP;
             String title;
             String artist;
             switch (selectedOption) {
