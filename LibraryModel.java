@@ -1,5 +1,7 @@
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public class LibraryModel {
 	
@@ -122,5 +124,35 @@ public class LibraryModel {
 			}
 		}
 		return exists; 
+	}
+	
+	public ArrayList<Song> getSongs() {
+		return songs;
+	}
+	
+	public Set<String> getArtists() {
+		Set<String> artists = new HashSet<>();
+		for (Song song : songs) {
+			artists.add(song.getArtist());
+		}
+		return artists;
+	}
+	
+	public ArrayList<Album> getAlbums() {
+		return albums;
+	}
+	
+	public ArrayList<Playlist> getPlaylists() {
+		return playlists;
+	}
+	
+	public ArrayList<Song> getFavs() {
+		ArrayList<Song> favs = new ArrayList<Song>();
+		for (Song song : songs) {
+			if (song.getFavorite()) {
+				favs.add(song);
+			}
+		}
+		return favs;
 	}
 }

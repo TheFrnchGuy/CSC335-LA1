@@ -1,5 +1,7 @@
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Scanner;
+import java.util.Set;
 
 public class View {
  
@@ -427,19 +429,55 @@ public class View {
             int selectedOption = Integer.parseInt(givenInput);
             switch (selectedOption) {
            		case 1:
-           			// get list of song titles
+           			// Obtain a list of song titles
+           			System.out.println("");
+           			System.out.println("Song List:");
+           			for (Song song : model.getSongs()) {
+           				System.out.println(song.getTitle());
+           			}
+           			System.out.println("");
+           			selectionList();
            			break;
            		case 2:
-           			// get list of artists
+           			// Obtain a list of artists
+           			System.out.println("");
+           			System.out.println("Artist List:");
+           			Set<String> artists = model.getArtists();
+           			for (String artist : artists) {
+           				System.out.println(artist);
+           			}
+           			System.out.println("");
+           			selectionList();
            			break;
            		case 3:
-           			// get list of albums
+           			// Obtain a list of albums
+           			System.out.println("");
+           			System.out.println("Album List:");
+           			for (Album album : model.getAlbums()) {
+           				System.out.println(album.getTitle());
+           			}
+           			System.out.println("");
+           			selectionList();
            			break;
            		case 4:
-           			// get list of playlists
+           			// Obtain a list of playlists
+           			System.out.println("");
+           			System.out.println("Playlist List:");
+           			for (Playlist playlist : model.getPlaylists()) {
+           				System.out.println(playlist.getName());
+           			}
+           			System.out.println("");
+           			selectionList();
            			break;
            		case 5:
-           			// get list of fav'd songs
+           			// Obtain a list of favorited songs
+           			System.out.println("");
+           			System.out.println("Favorite Songs List:");
+           			for (Song song : model.getFavs()) {
+           				System.out.println(song.getTitle());
+           			}
+           			System.out.println("");
+           			selectionList();
            			break;
            		case 6:
            			System.out.println("");
