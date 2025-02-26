@@ -15,7 +15,6 @@ public class Song {
     }
 
     /* METHODS */
-
     public String getTitle() {
         return title;
     }
@@ -37,5 +36,9 @@ public class Song {
         if (rating == Rating.FIVE) {
             this.favorite = true;
         }
+    }
+    
+    public void setFavorite() {
+    	this.favorite = true;
     }
 }
