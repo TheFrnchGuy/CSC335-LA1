@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Set;
@@ -7,15 +8,25 @@ public class View {
 	/* INSTANCE VARIABLES */
 	private static LibraryModel model = new LibraryModel();
 	private static Scanner scanner = new Scanner(System.in);
+	private static MusicStore music = new MusicStore();
 
 	/* CONSTRUCTOR */
 	public View() {
+		try {
+			music.loadAlbums("./albums/albums.txt");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/* METHODS */
+
+	public void begin() {
 		System.out.println("Welcome to Large Assignment 1");
 		System.out.println("by Paris Garcia and John Schmitt");
 		selectionList();
 	}
 
-	/* METHODS */
 	private static void selectionList() {
 		System.out.println("");
 		System.out.println("Choose one of the following options by typing the number next to it:");
@@ -165,7 +176,7 @@ public class View {
 				System.out.println("");
 				System.out.println("Input title:");
 				title = scanner.nextLine();
-				returnedPrints = model.music.songByTitle(title);
+				returnedPrints = music.songByTitle(title);
 				songPrintHelper(returnedPrints, 0);
 				break;
 			case 2:
@@ -173,7 +184,7 @@ public class View {
 				System.out.println("");
 				System.out.println("Input artist:");
 				artist = scanner.nextLine();
-				returnedPrints = model.music.songByArtist(artist);
+				returnedPrints = music.songByArtist(artist);
 				songPrintHelper(returnedPrints, 0);
 				break;
 			case 3:
@@ -181,7 +192,7 @@ public class View {
 				System.out.println("");
 				System.out.println("Input title:");
 				title = scanner.nextLine();
-				returnedPrints = model.music.albumByTitle(title);
+				returnedPrints = music.albumByTitle(title);
 				albumPrintHelper(returnedPrints, 0);
 				break;
 			case 4:
@@ -189,7 +200,7 @@ public class View {
 				System.out.println("");
 				System.out.println("Input artist:");
 				artist = scanner.nextLine();
-				returnedPrints = model.music.albumByArtist(artist);
+				returnedPrints = music.albumByArtist(artist);
 				albumPrintHelper(returnedPrints, 0);
 				break;
 			case 5:

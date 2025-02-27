@@ -6,7 +6,7 @@ import java.util.Set;
 public class LibraryModel {
 
 	/* INSTANCE VARIABLES */
-	protected MusicStore music;
+	private MusicStore music;
 	private ArrayList<Playlist> playlists;
 	private ArrayList<Song> songs;
 	private ArrayList<Album> albums;
