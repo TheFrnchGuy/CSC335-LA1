@@ -4,7 +4,7 @@ public class Song {
 	private String title;
 	private String artist;
 	private Rating rating;
-	private Boolean favorite;
+	private boolean favorite;
 
 	/* CONSTRUCTOR */
 	public Song(String title, String artist) {
@@ -27,7 +27,7 @@ public class Song {
 		return rating;
 	}
 
-	public Boolean getFavorite() {
+	public boolean getFavorite() {
 		return favorite;
 	}
 
