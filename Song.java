@@ -1,44 +1,44 @@
 public class Song {
- 
-    /* INSTANCE VARIABLES */
-    private String title;
-    private String artist;
-    private Rating rating;
-    private Boolean favorite;
 
-    /* CONSTRUCTOR */
-    public Song(String title, String artist) {
-        this.title = title;
-        this.artist = artist;
-        this.rating = Rating.NONE;
-        this.favorite = false;
-    }
+	/* INSTANCE VARIABLES */
+	private String title;
+	private String artist;
+	private Rating rating;
+	private Boolean favorite;
 
-    /* METHODS */
-    public String getTitle() {
-        return title;
-    }
+	/* CONSTRUCTOR */
+	public Song(String title, String artist) {
+		this.title = title;
+		this.artist = artist;
+		this.rating = Rating.NONE;
+		this.favorite = false;
+	}
 
-    public String getArtist() {
-        return artist;
-    }
+	/* METHODS */
+	public String getTitle() {
+		return title;
+	}
 
-    public Rating getRating() {
-        return rating;
-    }
-    
-    public Boolean getFavorite() {
-    	return favorite;
-    }
+	public String getArtist() {
+		return artist;
+	}
 
-    public void setRating(Rating rating) {
-        this.rating = rating;
-        if (rating == Rating.FIVE) {
-            this.favorite = true;
-        }
-    }
-    
-    public void setFavorite() {
-    	this.favorite = true;
-    }
+	public Rating getRating() {
+		return rating;
+	}
+
+	public Boolean getFavorite() {
+		return favorite;
+	}
+
+	public void setRating(Rating rating) {
+		this.rating = rating;
+		if (rating == Rating.FIVE) {
+			this.favorite = true;
+		}
+	}
+
+	public void setFavorite() {
+		this.favorite = true;
+	}
 }

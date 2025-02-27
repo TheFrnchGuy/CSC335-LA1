@@ -2,35 +2,39 @@ import java.util.ArrayList;
 
 public class Playlist {
 
-    /* INSTANCE VARIABLES */
-    private String name;
-    private ArrayList<Song> songs;
+	/* INSTANCE VARIABLES */
+	private String name;
+	private ArrayList<Song> songs;
 
-    /* CONSTRUCTOR */
-    public Playlist(String name) {
-        this.name = name;
-        this.songs = new ArrayList<>();
-    }
+	/* CONSTRUCTOR */
+	public Playlist(String name) {
+		this.name = name;
+		this.songs = new ArrayList<>();
+	}
 
-    /* METHODS */
+	/* METHODS */
+	public String getName() {
+		return name;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public ArrayList<Song> getSongs() {
+		ArrayList<Song> songsCopy = new ArrayList<Song>();
+		for (Song song : this.songs) {
+			Song s = new Song(song.getTitle(), song.getArtist());
+			s.setRating(song.getRating());
+			if (song.getFavorite()) {
+				s.setFavorite();
+			}
+			songsCopy.add(s);
+		}
+		return songsCopy;
+	}
 
-    public ArrayList<Song> getSongs() {
-        ArrayList<Song> songs = new ArrayList<>();
-        for (Song song : this.songs) {
-            songs.add(song);
-        }
-        return songs;
-    }
+	public void addSong(Song song) {
+		songs.add(song);
+	}
 
-    public void addSong(Song song) {
-        songs.add(song);
-    }
-
-    public void removeSong(Song song) {
-        songs.remove(song);
-    }
+	public void removeSong(Song song) {
+		songs.remove(song);
+	}
 }
