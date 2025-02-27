@@ -41,4 +41,18 @@ public class Song {
 	public void setFavorite() {
 		this.favorite = true;
 	}
+
+	public boolean compareTo(Song other) {
+		boolean same = false;
+		if (other.getTitle() == this.title) {
+			if (other.getArtist() == this.artist) {
+				if (other.getRating() == this.rating) {
+					if (other.getFavorite() == this.favorite) {
+						same = true;
+					}
+				}
+			}
+		}
+		return same;
+	}
 }

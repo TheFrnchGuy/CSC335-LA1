@@ -47,4 +47,14 @@ public class Album {
 		}
 		return songsCopy;
 	}
+
+	public boolean compareTo(Album other) {
+		boolean same = false;
+		if (other.getTitle() == this.title) {
+			if (other.getArtist() == this.artist) {
+				same = true;
+			}
+		}
+		return same;
+	}
 }

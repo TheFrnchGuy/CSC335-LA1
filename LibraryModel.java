@@ -157,11 +157,20 @@ public class LibraryModel {
 	// Add a song by its title
 	public boolean addSong(String title) {
 		boolean added = false;
+		boolean existsAlready = false;
 		for (Album album : music.getAlbums()) {
 			for (Song song : album.getSongs()) {
 				if (song.getTitle().toLowerCase().equals(title.toLowerCase())) {
-					songs.add(song);
+					existsAlready = false;
 					added = true;
+					for (Song librarySong : songs) {
+						if (librarySong.compareTo(song)) {
+							existsAlready = true;
+						}
+					}
+					if (!existsAlready) {
+						songs.add(song);
+					}
 				}
 			}
 		}
@@ -170,12 +179,21 @@ public class LibraryModel {
 
 	public boolean addAlbum(String title) {
 		boolean added = false;
+		boolean existsAlready = false;
 		for (Album album : music.getAlbums()) {
 			if (album.getTitle().toLowerCase().equals(title.toLowerCase())) {
+				existsAlready = false;
 				added = true;
-				albums.add(album);
-				for (Song song : album.getSongs()) {
-					songs.add(song);
+				for (Album libraryAlbum : albums) {
+					if (libraryAlbum.compareTo(album)) {
+						existsAlready = true;
+					}
+				}
+				if (!existsAlready) {
+					albums.add(album);
+					for (Song song : album.getSongs()) {
+						songs.add(song);
+					}
 				}
 			}
 		}
