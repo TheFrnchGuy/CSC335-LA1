@@ -154,7 +154,7 @@ public class LibraryModel {
 		return playlistsToReturn;
 	}
 
-	// Add a song by its title
+	// Add a song by its title and artist
 	public boolean addSong(String title, String artist) {
 		boolean added = false;
 		boolean existsAlready = false;
@@ -169,6 +169,7 @@ public class LibraryModel {
 							existsAlready = true;
 						}
 					}
+					// avoid duplicates
 					if (!existsAlready) {
 						songs.add(song);
 					}
@@ -178,6 +179,7 @@ public class LibraryModel {
 		return added;
 	}
 
+	// Add an album by its title and artist
 	public boolean addAlbum(String title, String artist) {
 		boolean added = false;
 		boolean existsAlready = false;
@@ -191,6 +193,7 @@ public class LibraryModel {
 						existsAlready = true;
 					}
 				}
+				// avoid duplicates
 				if (!existsAlready) {
 					albums.add(album);
 					for (Song song : album.getSongs()) {
@@ -202,10 +205,20 @@ public class LibraryModel {
 		return added;
 	}
 
+	// Creates a playlist of title name
 	public void createPlaylist(String title) {
-		playlists.add(new Playlist(title));
+		boolean existsAlready = false;
+		for (Playlist playlist : playlists) {
+			if (playlist.getName() == title) {
+				existsAlready = true;
+			}
+		}
+		if (!existsAlready) {
+			playlists.add(new Playlist(title));
+		}
 	}
 
+	// Adds a song to a playlist from given titles
 	public boolean[] addSongToPlaylist(String songTitle, String playTitle, String artist) {
 		boolean songExists = false;
 		boolean playExists = false;
@@ -232,6 +245,7 @@ public class LibraryModel {
 		return (exists);
 	}
 
+	// Removes a song from playlist with given titles
 	public boolean[] removeSongFromPlaylist(String songTitle, String playTitle, String artist) {
 		boolean songExists = false;
 		boolean playExists = false;
@@ -258,6 +272,7 @@ public class LibraryModel {
 		return (exists);
 	}
 
+	// Sets a song to favorite
 	public boolean favSong(String title, String artist) {
 		boolean exists = false;
 		for (Song song : songs) {
@@ -270,6 +285,7 @@ public class LibraryModel {
 		return exists;
 	}
 
+	// Rates a song
 	public boolean rateSong(String title, String artist, Rating rating) {
 		boolean exists = false;
 		for (Song song : songs) {
@@ -282,6 +298,7 @@ public class LibraryModel {
 		return exists;
 	}
 
+	// Gathers an arraylist of all songs
 	public ArrayList<Song> getSongs() {
 		ArrayList<Song> songsCopy = new ArrayList<Song>();
 		for (Song song : this.songs) {
@@ -295,6 +312,7 @@ public class LibraryModel {
 		return songsCopy;
 	}
 
+	// Gathers an arraylist of all artists
 	public Set<String> getArtists() {
 		Set<String> artists = new HashSet<>();
 		for (Song song : songs) {
@@ -303,6 +321,7 @@ public class LibraryModel {
 		return artists;
 	}
 
+	// Gathers an arraylist of all albums
 	public ArrayList<Album> getAlbums() {
 		ArrayList<Album> albumsCopy = new ArrayList<Album>();
 		for (Album album : albums) {
@@ -312,6 +331,7 @@ public class LibraryModel {
 		return albumsCopy;
 	}
 
+	// Gathers an arraylist of all playlists
 	public ArrayList<Playlist> getPlaylists() {
 		ArrayList<Playlist> playlistsCopy = new ArrayList<Playlist>();
 		for (Playlist playlist : playlists) {
@@ -319,10 +339,12 @@ public class LibraryModel {
 			for (Song song : playlist.getSongs()) {
 				p.addSong(song);
 			}
+			playlistsCopy.add(p);
 		}
 		return playlistsCopy;
 	}
 
+	// Gathers an arraylist of all fav'd songs
 	public ArrayList<Song> getFavs() {
 		ArrayList<Song> favs = new ArrayList<Song>();
 		for (Song song : songs) {

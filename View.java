@@ -166,7 +166,7 @@ public class View {
 				System.out.println("Input title:");
 				title = scanner.nextLine();
 				returnedPrints = model.music.songByTitle(title);
-				songPrintHelper(returnedPrints);
+				songPrintHelper(returnedPrints, 0);
 				break;
 			case 2:
 				// Search for a song by artist
@@ -174,7 +174,7 @@ public class View {
 				System.out.println("Input artist:");
 				artist = scanner.nextLine();
 				returnedPrints = model.music.songByArtist(artist);
-				songPrintHelper(returnedPrints);
+				songPrintHelper(returnedPrints, 0);
 				break;
 			case 3:
 				// Search for an album by title
@@ -182,7 +182,7 @@ public class View {
 				System.out.println("Input title:");
 				title = scanner.nextLine();
 				returnedPrints = model.music.albumByTitle(title);
-				albumPrintHelper(returnedPrints);
+				albumPrintHelper(returnedPrints, 0);
 				break;
 			case 4:
 				// Search for an album by artist
@@ -190,7 +190,7 @@ public class View {
 				System.out.println("Input artist:");
 				artist = scanner.nextLine();
 				returnedPrints = model.music.albumByArtist(artist);
-				albumPrintHelper(returnedPrints);
+				albumPrintHelper(returnedPrints, 0);
 				break;
 			case 5:
 				// Back
@@ -234,7 +234,7 @@ public class View {
 				System.out.println("Input title:");
 				title = scanner.nextLine();
 				returnedPrints = model.songByTitle(title);
-				songPrintHelper(returnedPrints);
+				songPrintHelper(returnedPrints, 1);
 				break;
 			case 2:
 				// Search for a song by artist
@@ -242,7 +242,7 @@ public class View {
 				System.out.println("Input artist:");
 				artist = scanner.nextLine();
 				returnedPrints = model.songByArtist(artist);
-				songPrintHelper(returnedPrints);
+				songPrintHelper(returnedPrints, 1);
 				break;
 			case 3:
 				// Search for an album by title
@@ -250,14 +250,14 @@ public class View {
 				System.out.println("Input title:");
 				title = scanner.nextLine();
 				returnedPrints = model.albumByTitle(title);
-				albumPrintHelper(returnedPrints);
+				albumPrintHelper(returnedPrints, 1);
 			case 4:
 				// Search for an album by artist
 				System.out.println("");
 				System.out.println("Input artist:");
 				artist = scanner.nextLine();
 				returnedPrints = model.albumByArtist(artist);
-				albumPrintHelper(returnedPrints);
+				albumPrintHelper(returnedPrints, 1);
 				break;
 			case 5:
 				// Search for a playlist by name
@@ -284,30 +284,37 @@ public class View {
 		}
 	}
 
-	private static void songPrintHelper(ArrayList<String> returnedPrints) {
+	private static void songPrintHelper(ArrayList<String> returnedPrints, int path) {
 		if (returnedPrints.size() == 0) {
 			System.out.println("Song not found");
 			System.out.println("");
-			musicStoreSearch();
+			if (path == 0) {
+				musicStoreSearch();
+			} else {
+				userLibrarySearch();
+			}
+
 		} else {
 			for (String song : returnedPrints) {
 				System.out.println(song);
 			}
-			System.out.println("");
 			selectionList();
 		}
 	}
 
-	private static void albumPrintHelper(ArrayList<String> returnedPrints) {
+	private static void albumPrintHelper(ArrayList<String> returnedPrints, int path) {
 		if (returnedPrints.size() == 0) {
 			System.out.println("Album not found");
 			System.out.println("");
-			musicStoreSearch();
+			if (path == 0) {
+				musicStoreSearch();
+			} else {
+				userLibrarySearch();
+			}
 		} else {
 			for (String albumDetails : returnedPrints) {
 				System.out.println(albumDetails);
 			}
-			System.out.println("");
 			selectionList();
 		}
 	}
@@ -358,10 +365,10 @@ public class View {
 			case 2:
 				// Add an album to the library
 				System.out.println("");
-				System.out.println("Input the title of your song: ");
+				System.out.println("Input the title of your album: ");
 				title = scanner.nextLine();
 				System.out.println("");
-				System.out.println("Input the artist of your song: ");
+				System.out.println("Input the artist of your album: ");
 				artist = scanner.nextLine();
 				if (model.addAlbum(title, artist)) {
 					System.out.println("Added album");

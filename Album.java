@@ -50,8 +50,8 @@ public class Album {
 
 	public boolean compareTo(Album other) {
 		boolean same = false;
-		if (other.getTitle() == this.title) {
-			if (other.getArtist() == this.artist) {
+		if (other.getTitle().equals(this.title)) {
+			if (other.getArtist().equals(this.artist)) {
 				same = true;
 			}
 		}
