@@ -1,7 +1,15 @@
+package view;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Set;
+
+import model.Album;
+import model.LibraryModel;
+import model.MusicStore;
+import model.Playlist;
+import model.Rating;
+import model.Song;
 
 public class View {
 
@@ -20,7 +28,6 @@ public class View {
 	}
 
 	/* METHODS */
-
 	public void begin() {
 		System.out.println("Welcome to Large Assignment 1");
 		System.out.println("by Paris Garcia and John Schmitt");
