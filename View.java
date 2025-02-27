@@ -32,6 +32,8 @@ public class View {
 		String givenInput = scanner.nextLine();
 		try {
 			int selectedOption = Integer.parseInt(givenInput);
+			String title;
+			String artist;
 			switch (selectedOption) {
 			case 1:
 				// Search for information from the music store
@@ -65,7 +67,11 @@ public class View {
 				// Mark a song as favorite
 				System.out.println("");
 				System.out.println("Input the title of your song: ");
-				if (model.favSong(scanner.nextLine())) {
+				title = scanner.nextLine();
+				System.out.println("");
+				System.out.println("Input the artist of your song: ");
+				artist = scanner.nextLine();
+				if (model.favSong(title, artist)) {
 					System.out.println("Song favorited.");
 				} else {
 					System.out.println("Song not in library.");
@@ -78,29 +84,32 @@ public class View {
 				boolean exists = false;
 				System.out.println("");
 				System.out.println("Input the title of your song: ");
-				String title = scanner.nextLine();
+				title = scanner.nextLine();
+				System.out.println("");
+				System.out.println("Input the artist of your song: ");
+				artist = scanner.nextLine();
 				System.out.println("");
 				System.out.println("Input the rating of your song (ONE, TWO, THREE, FOUR, or FIVE): ");
 				switch (scanner.nextLine().toLowerCase()) {
 				case "1":
 				case "one":
-					exists = model.rateSong(title, Rating.ONE);
+					exists = model.rateSong(title, artist, Rating.ONE);
 					break;
 				case "2":
 				case "two":
-					exists = model.rateSong(title, Rating.TWO);
+					exists = model.rateSong(title, artist, Rating.TWO);
 					break;
 				case "3":
 				case "three":
-					exists = model.rateSong(title, Rating.THREE);
+					exists = model.rateSong(title, artist, Rating.THREE);
 					break;
 				case "4":
 				case "four":
-					exists = model.rateSong(title, Rating.FOUR);
+					exists = model.rateSong(title, artist, Rating.FOUR);
 					break;
 				case "5":
 				case "five":
-					exists = model.rateSong(title, Rating.FIVE);
+					exists = model.rateSong(title, artist, Rating.FIVE);
 					break;
 				default:
 					System.out.println("Invalid Input");
@@ -328,13 +337,17 @@ public class View {
 		try {
 			int selectedOption = Integer.parseInt(givenInput);
 			String title;
+			String artist;
 			switch (selectedOption) {
 			case 1:
 				// Add a song to the library
 				System.out.println("");
-				System.out.println("Input title of song:");
+				System.out.println("Input the title of your song: ");
 				title = scanner.nextLine();
-				if (model.addSong(title)) {
+				System.out.println("");
+				System.out.println("Input the artist of your song: ");
+				artist = scanner.nextLine();
+				if (model.addSong(title, artist)) {
 					System.out.println("Added song");
 				} else {
 					System.out.println("Couldn't find song");
@@ -345,9 +358,12 @@ public class View {
 			case 2:
 				// Add an album to the library
 				System.out.println("");
-				System.out.println("Input title of album:");
+				System.out.println("Input the title of your song: ");
 				title = scanner.nextLine();
-				if (model.addAlbum(title)) {
+				System.out.println("");
+				System.out.println("Input the artist of your song: ");
+				artist = scanner.nextLine();
+				if (model.addAlbum(title, artist)) {
 					System.out.println("Added album");
 				} else {
 					System.out.println("Couldn't find album");
@@ -464,6 +480,7 @@ public class View {
 		String givenInput = scanner.nextLine();
 		String songTitle;
 		String playTitle;
+		String artist;
 		boolean[] exists;
 		try {
 			int selectedOption = Integer.parseInt(givenInput);
@@ -476,7 +493,10 @@ public class View {
 				System.out.println("");
 				System.out.println("Input the title of the song:");
 				songTitle = scanner.nextLine();
-				exists = model.addSongToPlaylist(songTitle, playTitle);
+				System.out.println("");
+				System.out.println("Input the artist of the song:");
+				artist = scanner.nextLine();
+				exists = model.addSongToPlaylist(songTitle, playTitle, artist);
 				if (exists[0] && exists[1]) {
 					System.out.println("");
 					System.out.println("Song has been added to playlist.");
@@ -502,7 +522,10 @@ public class View {
 				System.out.println("");
 				System.out.println("Input the title of the song");
 				songTitle = scanner.nextLine();
-				exists = model.removeSongFromPlaylist(songTitle, playTitle);
+				System.out.println("");
+				System.out.println("Input the artist of the song:");
+				artist = scanner.nextLine();
+				exists = model.removeSongFromPlaylist(songTitle, playTitle, artist);
 				if (exists[0] && exists[1]) {
 					System.out.println("");
 					System.out.println("Song has been removed from playlist.");

@@ -155,12 +155,13 @@ public class LibraryModel {
 	}
 
 	// Add a song by its title
-	public boolean addSong(String title) {
+	public boolean addSong(String title, String artist) {
 		boolean added = false;
 		boolean existsAlready = false;
 		for (Album album : music.getAlbums()) {
 			for (Song song : album.getSongs()) {
-				if (song.getTitle().toLowerCase().equals(title.toLowerCase())) {
+				if (song.getTitle().toLowerCase().equals(title.toLowerCase())
+						&& song.getArtist().toLowerCase().equals(artist.toLowerCase())) {
 					existsAlready = false;
 					added = true;
 					for (Song librarySong : songs) {
@@ -177,11 +178,12 @@ public class LibraryModel {
 		return added;
 	}
 
-	public boolean addAlbum(String title) {
+	public boolean addAlbum(String title, String artist) {
 		boolean added = false;
 		boolean existsAlready = false;
 		for (Album album : music.getAlbums()) {
-			if (album.getTitle().toLowerCase().equals(title.toLowerCase())) {
+			if (album.getTitle().toLowerCase().equals(title.toLowerCase())
+					&& album.getArtist().toLowerCase().equals(artist.toLowerCase())) {
 				existsAlready = false;
 				added = true;
 				for (Album libraryAlbum : albums) {
@@ -204,11 +206,12 @@ public class LibraryModel {
 		playlists.add(new Playlist(title));
 	}
 
-	public boolean[] addSongToPlaylist(String songTitle, String playTitle) {
+	public boolean[] addSongToPlaylist(String songTitle, String playTitle, String artist) {
 		boolean songExists = false;
 		boolean playExists = false;
 		for (Song song : songs) {
-			if (song.getTitle().toLowerCase().equals(songTitle.toLowerCase())) {
+			if (song.getTitle().toLowerCase().equals(songTitle.toLowerCase())
+					&& song.getArtist().toLowerCase().equals(artist.toLowerCase())) {
 				songExists = true;
 				for (Playlist playlist : playlists) {
 					if (playlist.getName().toLowerCase().equals(playTitle.toLowerCase())) {
@@ -229,14 +232,15 @@ public class LibraryModel {
 		return (exists);
 	}
 
-	public boolean[] removeSongFromPlaylist(String songTitle, String playTitle) {
+	public boolean[] removeSongFromPlaylist(String songTitle, String playTitle, String artist) {
 		boolean songExists = false;
 		boolean playExists = false;
 		for (Playlist playlist : playlists) {
 			if (playlist.getName().toLowerCase().equals(playTitle.toLowerCase())) {
 				playExists = true;
 				for (Song song : playlist.getSongs()) {
-					if (song.getTitle().toLowerCase().equals(songTitle.toLowerCase())) {
+					if (song.getTitle().toLowerCase().equals(songTitle.toLowerCase())
+							&& song.getArtist().toLowerCase().equals(artist.toLowerCase())) {
 						songExists = true;
 						playlist.removeSong(song);
 					}
@@ -254,10 +258,11 @@ public class LibraryModel {
 		return (exists);
 	}
 
-	public boolean favSong(String title) {
+	public boolean favSong(String title, String artist) {
 		boolean exists = false;
 		for (Song song : songs) {
-			if (song.getTitle().toLowerCase().equals(title.toLowerCase())) {
+			if (song.getTitle().toLowerCase().equals(title.toLowerCase())
+					&& song.getArtist().toLowerCase().equals(artist.toLowerCase())) {
 				song.setFavorite();
 				exists = true;
 			}
@@ -265,10 +270,11 @@ public class LibraryModel {
 		return exists;
 	}
 
-	public boolean rateSong(String title, Rating rating) {
+	public boolean rateSong(String title, String artist, Rating rating) {
 		boolean exists = false;
 		for (Song song : songs) {
-			if (song.getTitle().toLowerCase().equals(title.toLowerCase())) {
+			if (song.getTitle().toLowerCase().equals(title.toLowerCase())
+					&& song.getArtist().toLowerCase().equals(artist.toLowerCase())) {
 				song.setRating(rating);
 				exists = true;
 			}
