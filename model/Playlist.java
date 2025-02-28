@@ -1,4 +1,5 @@
 package model;
+
 import java.util.ArrayList;
 
 public class Playlist {
@@ -36,6 +37,12 @@ public class Playlist {
 	}
 
 	public void removeSong(Song song) {
-		songs.remove(song);
+		Song toBeRemoved = null;
+		for (Song songHere : this.songs) {
+			if (songHere.compareTo(song)) {
+				toBeRemoved = songHere;
+			}
+		}
+		songs.remove(toBeRemoved);
 	}
 }
