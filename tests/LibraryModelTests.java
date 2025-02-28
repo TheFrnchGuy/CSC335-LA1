@@ -163,6 +163,7 @@ public class LibraryModelTests {
     @Test
     public void testGetAlbums() {
         library.addAlbum("19", "Adele");
+        library.addAlbum("19", "Adele");
         ArrayList<Album> albums = library.getAlbums();
         assertEquals(1, albums.size());
         assertEquals("19", albums.get(0).getTitle());
@@ -190,6 +191,7 @@ public class LibraryModelTests {
 
     @Test
     public void testGetFavs() {
+        library.addSong("Wintertime", "Norah Jones");
         library.addSong("Wintertime", "Norah Jones");
         library.favSong("Wintertime", "Norah Jones");
         ArrayList<Song> favs = library.getFavs();
