@@ -25,7 +25,7 @@ public class MusicStoreTest {
         try {
             store.loadAlbums("./albums/test_albums.txt");
             ArrayList<Album> album = store.getAlbums();
-            Album test_album = album.getFirst();
+            Album test_album = album.get(0);
             assertNotNull(album);
             assertEquals("Test Artist", test_album.getArtist());
             assertEquals("Rock", test_album.getGenre());
