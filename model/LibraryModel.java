@@ -20,8 +20,62 @@ public class LibraryModel {
 			e.printStackTrace();
 		}
 		this.playlists = new ArrayList<Playlist>();
+		this.playlists.add(new Playlist("Frequently Played"));
+		this.playlists.add(new Playlist("Recently Played"));
 		this.songs = new ArrayList<Song>();
 		this.albums = new ArrayList<Album>();
+	}
+
+	// Play a song from the library
+	public void playSong(String title, String artist) {
+		for (Song song : songs) {
+			if (song.getTitle().toLowerCase().equals(title.toLowerCase())
+					&& song.getArtist().toLowerCase().equals(artist.toLowerCase())) {
+				song.playSong();
+
+				// add to frequently played playlist
+				for (Playlist playlist : playlists) {
+					if (playlist.getName().equals("Frequently Played")) {
+						// If playlist has less than 10 songs, add song to playlist
+						if (playlist.getSongs().size() < 10){
+							playlist.addSong(song);
+						}
+						else {
+							// Check if song has more plays than the least played song
+							Song leastPlayed = playlist.getSongs().get(0);
+							for (Song s : playlist.getSongs()) {
+								if (s.getPlays() < leastPlayed.getPlays()) {
+									leastPlayed = s;
+								}
+							}
+							if (song.getPlays() > leastPlayed.getPlays()) {
+								playlist.removeSong(leastPlayed);
+								playlist.addSong(song);
+							}
+						}
+					}
+				}
+
+				// add to recently played playlist
+				for (Playlist playlist : playlists) {
+					if (playlist.getName().equals("Recently Played")) {
+						// If playlist has less than 10 songs, add song to playlist
+						if (playlist.getSongs().size() < 10){
+							playlist.addSong(song);
+						}
+						else {
+							// If song is already in the playlist, move it to the end of the list
+							if (playlist.getSongs().contains(song)) {
+								playlist.removeSong(song);
+							} else if (playlist.getSongs().size() >= 10) {
+								playlist.removeSong(playlist.getSongs().get(0));
+							}
+							playlist.addSong(song);
+						}
+					}
+				}
+			}
+		}
 	}
 
 	// Get a song by its title
@@ -305,6 +359,7 @@ public class LibraryModel {
 		for (Song song : this.songs) {
 			Song s = new Song(song.getTitle(), song.getArtist());
 			s.setRating(song.getRating());
+			s.setPlays(song.getPlays());
 			if (song.getFavorite()) {
 				s.setFavorite();
 			}
@@ -352,6 +407,7 @@ public class LibraryModel {
 			if (song.getFavorite()) {
 				Song s = new Song(song.getTitle(), song.getArtist());
 				s.setRating(song.getRating());
+				s.setPlays(song.getPlays());
 				favs.add(s);
 			}
 		}

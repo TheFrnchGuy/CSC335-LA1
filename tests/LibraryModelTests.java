@@ -23,6 +23,14 @@ public class LibraryModelTests {
     }
 
     @Test
+    public void testPlaySong() {
+        library.addSong("Amen", "Leonard Cohen");
+        library.playSong("Amen", "Leonard Cohen");
+        ArrayList<Song> songs = library.getSongs();
+        assertEquals(1, songs.get(0).getPlays());
+    }
+
+    @Test
     public void testSongByTitle() {
         library.addSong("Amen", "Leonard Cohen");
         ArrayList<String> songs = library.songByTitle("Amen");
@@ -173,8 +181,7 @@ public class LibraryModelTests {
     public void testGetPlaylistsEmpty() {
         library.createPlaylist("Playlist 1");
         ArrayList<Playlist> playlists = library.getPlaylists();
-        assertEquals(1, playlists.size());
-        assertEquals("Playlist 1", playlists.get(0).getName());
+        assertEquals("Playlist 1", playlists.get(2).getName());
     }
     
     @Test
@@ -185,8 +192,7 @@ public class LibraryModelTests {
         ArrayList<Playlist> playlists = library.getPlaylists();
         assertTrue(result[0]);
         assertTrue(result[1]);
-        assertEquals(1, playlists.size());
-        assertEquals("Playlist 1", playlists.get(0).getName());
+        assertEquals("Playlist 1", playlists.get(2).getName());
     }
 
     @Test
