@@ -7,6 +7,7 @@ public class Song {
 	private String artist;
 	private Rating rating;
 	private boolean favorite;
+	private int plays = 0;
 
 	/* CONSTRUCTOR */
 	public Song(String title, String artist) {
@@ -33,6 +34,10 @@ public class Song {
 		return favorite;
 	}
 
+	public int getPlays() {
+		return plays;
+	}
+
 	public void setRating(Rating rating) {
 		this.rating = rating;
 		if (rating == Rating.FIVE) {
@@ -42,6 +47,15 @@ public class Song {
 
 	public void setFavorite() {
 		this.favorite = true;
+	}
+
+	public void setPlays(int plays) {
+		this.plays = plays;
+	}
+
+	public void playSong() {
+		System.out.println("Playing " + this.title + " by " + this.artist);
+		this.plays++;
 	}
 
 	public boolean compareTo(Song other) {
