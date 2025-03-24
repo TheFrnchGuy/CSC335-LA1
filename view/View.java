@@ -39,10 +39,10 @@ public class View {
 		System.out.println("Choose one of the following options by typing the number next to it:");
 		System.out.println("[1] Search for information from the music store");
 		System.out.println("[2] Search for information from the user library");
-		System.out.println("[3] Add something to the library");
+		System.out.println("[3] Add/remove/shuffle something to/from the library");
 		System.out.println("[4] Get a list of items from the library");
 		System.out.println("[5] Create a playlist");
-		System.out.println("[6] Add/remove songs from a playlist");
+		System.out.println("[6] Add/remove/shuffle songs to/from a playlist");
 		System.out.println("[7] Mark a song as favorite");
 		System.out.println("[8] Rate a song");
 		System.out.println("[9] Quit program");
@@ -167,9 +167,10 @@ public class View {
 		System.out.println("Choose one of the following options by typing the number next to it:");
 		System.out.println("[1] Search for a song by title");
 		System.out.println("[2] Search for a song by artist");
-		System.out.println("[3] Search for an album by title");
-		System.out.println("[4] Search for an album by artist");
-		System.out.println("[5] Back");
+		System.out.println("[3] Search for a song by genre");
+		System.out.println("[4] Search for an album by title");
+		System.out.println("[5] Search for an album by artist");
+		System.out.println("[6] Back");
 
 		String givenInput = scanner.nextLine();
 		try {
@@ -177,6 +178,7 @@ public class View {
 			ArrayList<String> returnedPrints;
 			String title;
 			String artist;
+			String genre;
 			switch (selectedOption) {
 			case 1:
 				// Search for a song by title
@@ -195,6 +197,14 @@ public class View {
 				songPrintHelper(returnedPrints, 0);
 				break;
 			case 3:
+				// Search for a song by genre
+				System.out.println("");
+				System.out.println("Input genre:");
+				genre = scanner.nextLine();
+				returnedPrints = music.songByArtist(genre);
+				songPrintHelper(returnedPrints, 0);
+				break;
+			case 4:
 				// Search for an album by title
 				System.out.println("");
 				System.out.println("Input title:");
@@ -202,7 +212,7 @@ public class View {
 				returnedPrints = music.albumByTitle(title);
 				albumPrintHelper(returnedPrints, 0);
 				break;
-			case 4:
+			case 5:
 				// Search for an album by artist
 				System.out.println("");
 				System.out.println("Input artist:");
@@ -210,7 +220,7 @@ public class View {
 				returnedPrints = music.albumByArtist(artist);
 				albumPrintHelper(returnedPrints, 0);
 				break;
-			case 5:
+			case 6:
 				// Back
 				System.out.println("");
 				selectionList();
@@ -355,8 +365,11 @@ public class View {
 		System.out.println("");
 		System.out.println("Choose one of the following options by typing the number next to it:");
 		System.out.println("[1] Add a song to the library");
-		System.out.println("[2] Add an album to the library");
-		System.out.println("[3] Back");
+		System.out.println("[2] Add a song to the library");
+		System.out.println("[3] Add an album to the library");
+		System.out.println("[4] Add an album to the library");
+		System.out.println("[5] Shuffle the library");
+		System.out.println("[6] Back");
 
 		String givenInput = scanner.nextLine();
 		try {
@@ -381,6 +394,22 @@ public class View {
 				selectionList();
 				break;
 			case 2:
+				// Add a song to the library
+				System.out.println("");
+				System.out.println("Input the title of your song: ");
+				title = scanner.nextLine();
+				System.out.println("");
+				System.out.println("Input the artist of your song: ");
+				artist = scanner.nextLine();
+				if (model.removeSong(title, artist)) {
+					System.out.println("Removed song");
+				} else {
+					System.out.println("Couldn't find song");
+				}
+				System.out.println("");
+				selectionList();
+				break;
+			case 3:
 				// Add an album to the library
 				System.out.println("");
 				System.out.println("Input the title of your album: ");
@@ -396,7 +425,30 @@ public class View {
 				System.out.println("");
 				selectionList();
 				break;
-			case 3:
+			case 4:
+				// Remove an album to the library
+				System.out.println("");
+				System.out.println("Input the title of your album: ");
+				title = scanner.nextLine();
+				System.out.println("");
+				System.out.println("Input the artist of your album: ");
+				artist = scanner.nextLine();
+				if (model.removeAlbum(title, artist)) {
+					System.out.println("Removed album");
+				} else {
+					System.out.println("Couldn't find album");
+				}
+				System.out.println("");
+				selectionList();
+				break;
+			case 5:
+				// Shuffle the library
+				model.shuffle();
+				System.out.println("Library shuffled");
+				System.out.println("");
+				selectionList();
+				break;
+			case 6:
 				System.out.println("");
 				selectionList();
 				break;
@@ -430,9 +482,28 @@ public class View {
 			case 1:
 				// Obtain a list of song titles
 				System.out.println("");
-				System.out.println("Song List:");
-				for (Song song : model.getSongs()) {
-					System.out.println(song.getTitle());
+				System.out.println("Choose one of the following options by typing the number next to it:");
+				System.out.println("[1] Sort by song title");
+				System.out.println("[2] Sort by song artist");
+				System.out.println("[3] Sort by user rating");
+				givenInput = scanner.nextLine();
+				int sortOption = Integer.parseInt(givenInput);
+				switch (sortOption) {
+				case 1:
+					for (Song song : model.getSortedSongs("title")) {
+						System.out.println(song.getTitle());
+					}
+					break;
+				case 2:
+				for (Song song : model.getSortedSongs("artist")) {
+					System.out.println(song.getTitle() + " by " + song.getArtist());
+				}
+					break;
+				case 3:
+				for (Song song : model.getSortedSongs("rating")) {
+					System.out.println(song.getRating() + ": " + song.getTitle());
+				}
+					break;
 				}
 				System.out.println("");
 				selectionList();
@@ -500,7 +571,8 @@ public class View {
 		System.out.println("Choose one of the following options by typing the number next to it:");
 		System.out.println("[1] Add a song to a playlist");
 		System.out.println("[2] Remove a song from a playlist");
-		System.out.println("[3] Back");
+		System.out.println("[3] Shuffle a playlist");
+		System.out.println("[4] Back");
 
 		String givenInput = scanner.nextLine();
 		String songTitle;
@@ -569,6 +641,20 @@ public class View {
 				}
 				break;
 			case 3:
+				// Shuffle a playlist
+				System.out.println("");
+				System.out.println("Input the title of the playlist:");
+				playTitle = scanner.nextLine();
+				for (Playlist playlist : model.getPlaylists()) {
+					if (playlist.getName().equals(playTitle)) {
+						playlist.shuffle();
+						System.out.println("Playlist shuffled.");
+					}
+				}
+				System.out.println("");
+				selectionList();
+				break;
+			case 4:
 				System.out.println("");
 				selectionList();
 				break;
