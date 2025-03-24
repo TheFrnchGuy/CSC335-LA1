@@ -234,6 +234,20 @@ public class LibraryModel {
 		return added;
 	}
 
+	// Remove a song by its title and artist
+	public boolean removeSong(String title, String artist) {
+		boolean removed = false;
+		for (Song song : songs) {
+			if (song.getTitle().toLowerCase().equals(title.toLowerCase())
+					&& song.getArtist().toLowerCase().equals(artist.toLowerCase())) {
+				songs.remove(song);
+				removed = true;
+				break;
+			}
+		}
+		return removed;
+	}
+
 	// Add an album by its title and artist
 	public boolean addAlbum(String title, String artist) {
 		boolean added = false;
@@ -258,6 +272,20 @@ public class LibraryModel {
 			}
 		}
 		return added;
+	}
+
+	// Remove an album by its title and artist
+	public boolean removeAlbum(String title, String artist) {
+		boolean removed = false;
+		for (Album album : albums) {
+			if (album.getTitle().toLowerCase().equals(title.toLowerCase())
+					&& album.getArtist().toLowerCase().equals(artist.toLowerCase())) {
+				albums.remove(album);
+				removed = true;
+				break;
+			}
+		}
+		return removed;
 	}
 
 	// Creates a playlist of title name
