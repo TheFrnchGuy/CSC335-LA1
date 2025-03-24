@@ -94,6 +94,21 @@ public class MusicStoreTest {
     }
 
     @Test
+    public void testSongsByGenre() {
+        try {
+            store.loadAlbums("./albums/test_albums.txt");
+            ArrayList<String> songs = store.songByGenre("Rock");
+            assertNotNull(songs);
+            assertEquals(3, songs.size());
+            assertTrue(songs.get(0).contains("Song 1"));
+            assertTrue(songs.get(1).contains("Song 2"));
+            assertTrue(songs.get(2).contains("Song 3"));
+        } catch (IOException e) {
+            fail("IOException should not have been thrown");
+        }
+    }
+
+    @Test
     public void testAlbumByTitle() {
         try {
             store.loadAlbums("./albums/test_albums.txt");
