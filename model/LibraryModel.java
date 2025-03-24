@@ -23,6 +23,7 @@ public class LibraryModel {
 		this.playlists = new ArrayList<Playlist>();
 		this.playlists.add(new Playlist("Frequently Played"));
 		this.playlists.add(new Playlist("Recently Played"));
+		this.playlists.add(new Playlist("Favorites"));
 		this.songs = new ArrayList<Song>();
 		this.albums = new ArrayList<Album>();
 	}
@@ -364,6 +365,7 @@ public class LibraryModel {
 					&& song.getArtist().toLowerCase().equals(artist.toLowerCase())) {
 				song.setFavorite();
 				exists = true;
+				addSongToPlaylist(title, "Favorite", artist);
 			}
 		}
 		return exists;
@@ -377,6 +379,9 @@ public class LibraryModel {
 					&& song.getArtist().toLowerCase().equals(artist.toLowerCase())) {
 				song.setRating(rating);
 				exists = true;
+				if (rating == Rating.FIVE) {
+					addSongToPlaylist(title, "Favorites", artist);
+				}
 			}
 		}
 		return exists;

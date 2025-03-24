@@ -8,5 +8,8 @@ The purpose of this program is to manipulate the data of a library of songs, sto
 
 Jar file was compiled using eclipse JRE 1.8
 
+To run jar, navigate to the directory with the jar and run the following:
+java -jar LA2.jar
+
 Link to Video Overview:
 https://drive.google.com/file/d/1mu1o8noPp0aSPSS5BQpu6IIcyXIN6WmE/view?usp=sharing
