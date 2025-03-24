@@ -91,6 +91,22 @@ public class MusicStore {
 		return songToStringHelper(resultS, resultA);
 	}
 
+	// Get a song by its genre
+	public ArrayList<String> songByGenre(String genre) {
+		ArrayList<Album> resultA = new ArrayList<Album>();
+		ArrayList<Song> resultS = new ArrayList<Song>();
+		// adds songs of our genre and their matching albums
+		for (Album album : albums.values()) {
+			if (album.getGenre().toLowerCase().equals(genre.toLowerCase())) {
+				for (Song song : album.getSongs()) {
+					resultS.add(song);
+					resultA.add(album);
+				}
+			}
+		}
+		return songToStringHelper(resultS, resultA);
+	}
+
 	private ArrayList<String> songToStringHelper(ArrayList<Song> resultS, ArrayList<Album> resultA) {
 		if (resultS.size() == 0) {
 			// if no songs return an empty arraylist
