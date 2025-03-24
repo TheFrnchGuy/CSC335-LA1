@@ -92,12 +92,32 @@ public class LibraryModelTests {
     }
 
     @Test
+    public void testRemeoveSong() {
+        boolean added = library.addSong("Uh Oh", "Norah Jones");
+        assertTrue(added);
+        boolean removed = library.removeSong("Uh Oh", "Norah Jones");
+        assertTrue(removed);
+        ArrayList<Song> songs = library.getSongs();
+        assertEquals(0, songs.size());
+    }
+
+    @Test
     public void testAddAlbum() {
         boolean added = library.addAlbum("Begin Again", "Norah Jones");
         assertTrue(added);
         ArrayList<Album> albums = library.getAlbums();
         assertEquals(1, albums.size());
         assertEquals("Begin Again", albums.get(0).getTitle());
+    }
+
+    @Test
+    public void testRemoveAlbum() {
+        boolean added = library.addAlbum("Begin Again", "Norah Jones");
+        assertTrue(added);
+        boolean removed = library.removeAlbum("Begin Again", "Norah Jones");
+        assertTrue(removed);
+        ArrayList<Album> albums = library.getAlbums();
+        assertEquals(0, albums.size());
     }
 
     @Test
