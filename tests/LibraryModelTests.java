@@ -230,7 +230,7 @@ public class LibraryModelTests {
     public void testGetPlaylistsEmpty() {
         library.createPlaylist("Playlist 1");
         ArrayList<Playlist> playlists = library.getPlaylists();
-        assertEquals("Playlist 1", playlists.get(2).getName());
+        assertEquals("Playlist 1", playlists.get(3).getName());
     }
     
     @Test
@@ -241,7 +241,7 @@ public class LibraryModelTests {
         ArrayList<Playlist> playlists = library.getPlaylists();
         assertTrue(result[0]);
         assertTrue(result[1]);
-        assertEquals("Playlist 1", playlists.get(2).getName());
+        assertEquals("Playlist 1", playlists.get(3).getName());
     }
 
     @Test
