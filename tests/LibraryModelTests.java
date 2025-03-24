@@ -159,6 +159,35 @@ public class LibraryModelTests {
     }
 
     @Test
+    public void testgetSortedSongByTitle(){
+        library.addSong("It Was You", "Norah Jones");
+        library.addSong("Daydreamer", "Adele");
+        ArrayList<Song> songs = library.getSortedSongs("title");
+        assertEquals("Daydreamer", songs.get(0).getTitle());
+        assertEquals("It Was You", songs.get(1).getTitle());
+    }
+
+    @Test
+    public void testgetSortedSongByArtist(){
+        library.addSong("It Was You", "Norah Jones");
+        library.addSong("Daydreamer", "Adele");
+        ArrayList<Song> songs = library.getSortedSongs("artist");
+        assertEquals("Adele", songs.get(0).getArtist());
+        assertEquals("Norah Jones", songs.get(1).getArtist());
+    }
+
+    @Test
+    public void testgetSortedSongByRating(){
+        library.addSong("It Was You", "Norah Jones");
+        library.addSong("Daydreamer", "Adele");
+        library.rateSong("It Was You", "Norah Jones", Rating.FIVE);
+        library.rateSong("Daydreamer", "Adele", Rating.THREE);
+        ArrayList<Song> songs = library.getSortedSongs("rating");
+        assertEquals(Rating.FIVE, songs.get(0).getRating());
+        assertEquals(Rating.THREE, songs.get(1).getRating());
+    }
+
+    @Test
     public void testGetArtists() {
         library.addSong("It Was You", "Norah Jones");
         library.addSong("Daydreamer", "Adele");

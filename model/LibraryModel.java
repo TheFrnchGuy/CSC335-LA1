@@ -354,6 +354,19 @@ public class LibraryModel {
 		return exists;
 	}
 
+	// Gathers an arraylist of all songs, sorted by user input
+	public ArrayList<Song> getSortedSongs(String sortBy) {
+		ArrayList<Song> songsCopy = this.getSongs();
+		if (sortBy.equals("title")) {
+			Collections.sort(songsCopy, (o1, o2) -> o1.getTitle().compareTo(o2.getTitle()));
+		} else if (sortBy.equals("artist")) {
+			Collections.sort(songsCopy, (o1, o2) -> o1.getArtist().compareTo(o2.getArtist()));
+		} else if (sortBy.equals("rating")) {
+			Collections.sort(songsCopy, (o1, o2) -> o1.getRating().compareTo(o2.getRating()));
+		}
+		return songsCopy;
+	}
+
 	// Gathers an arraylist of all songs
 	public ArrayList<Song> getSongs() {
 		ArrayList<Song> songsCopy = new ArrayList<Song>();
